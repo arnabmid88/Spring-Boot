@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.StreamingHttpOutputMessage.Body;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,6 +21,7 @@ import com.stackroute.muzixservice.exception.TrackNotFoundException;
 import com.stackroute.muzixservice.service.MuzixServices;
 
 @RestController
+@CrossOrigin("*")
 @RequestMapping("api/v1/muzixservice")
 public class MuzixController {
 	

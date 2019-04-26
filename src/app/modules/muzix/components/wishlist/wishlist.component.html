@@ -1,0 +1,4 @@
+<div class="container">
+  <app-card *ngFor='let track of tracks' [track]='track' [wishData]='wishData' (deleteFromWishlist)='deleteFromWishlist($event)'
+   (updateComments)='updateComments($event)'></app-card>
+</div>

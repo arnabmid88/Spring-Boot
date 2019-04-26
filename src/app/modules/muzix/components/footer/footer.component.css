@@ -1,0 +1,10 @@
+.mat-toolbar{
+    height: 7vh;
+    font-family: 'Acme', sans-serif;
+    font-size: 1.2em;
+    background-color: #9c1148;
+}
+.footer{
+    margin: auto;
+    color: #fff;
+}

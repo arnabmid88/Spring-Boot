@@ -1,0 +1,14 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+
+    <img class="image-class" src="assets/image/fsd_logo.png">
+
+    <button class="mat-button-track" mat-button [matMenuTriggerFor]="menu">Track</button>
+      <mat-menu #menu="matMenu">
+        <button [routerLink]="['/India']" mat-menu-item class="mat-menu-item-india">India</button>
+        <button [routerLink]="['/Spain']" mat-menu-item class="mat-menu-item-spain">Spain</button>
+      </mat-menu>
+    
+    <button class="mat-button-wishlist" mat-button [routerLink]="['/WishList']">Wishlist</button>
+  </mat-toolbar-row>
+</mat-toolbar>
