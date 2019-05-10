@@ -6,11 +6,11 @@ services:
    - 'mysql:5.5'
    - 'mongo:3.4-jessie'
 variables:
-   MYSQL_URL:"jdbc:mysql://mysql/userDb"
-   MYSQL_DATABASE:"userDb"
-   MYSQL_USER:"app_root"
-   MYSQL_PASSWORD:"root"
-   MYSQL_ROOT_PASSWORD:"root"
+   MYSQL_URL: "jdbc:mysql://mysql/userDb"
+   MYSQL_DATABASE: "userDb"
+   MYSQL_USER: "app_root"
+   MYSQL_PASSWORD: "root"
+   MYSQL_ROOT_PASSWORD: "root"
    MONGO_DATABASE: "muzixdb"
    MONGO_URL: "mongodb://mongo/muzixdb"
 cache:
