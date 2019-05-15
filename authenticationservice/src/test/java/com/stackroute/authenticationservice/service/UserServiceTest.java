@@ -29,7 +29,7 @@ public class UserServiceTest {
 	public void setup() {
 		user = new User();
 		
-		user.setUserName("Arnab123");
+		user.setUsername("Arnab123");
 		user.setPassword("arnab123");
 	}
 	
@@ -44,18 +44,18 @@ public class UserServiceTest {
 		Mockito.when(userRepository.save(user)).thenReturn(user);
 		
 		User fetchUser = userService.saveUser(user);
-		Assert.assertEquals(user.getUserName(), fetchUser.getUserName());
+		Assert.assertEquals(user.getUsername(), fetchUser.getUsername());
 		Mockito.verify(userRepository, Mockito.times(1)).save(user);
 	}
 	
 	@Test
 	public void testFindbyUsernameandPassword() throws UserNotFoundException {
 		
-		Mockito.when(userRepository.findByUserNameAndPassword(user.getUserName(),user.getPassword())).thenReturn(user);
+		Mockito.when(userRepository.findByUsernameAndPassword(user.getUsername(),user.getPassword())).thenReturn(user);
 		
-		User fetchUser = userService.findByUsernameAndPassword(user.getUserName(), user.getPassword());
-		Assert.assertEquals(user.getUserName(), fetchUser.getUserName());
-		Mockito.verify(userRepository, Mockito.times(1)).findByUserNameAndPassword(user.getUserName(), user.getPassword());
+		User fetchUser = userService.findByUsernameAndPassword(user.getUsername(), user.getPassword());
+		Assert.assertEquals(user.getUsername(), fetchUser.getUsername());
+		Mockito.verify(userRepository, Mockito.times(1)).findByUsernameAndPassword(user.getUsername(), user.getPassword());
 	}
 
 }

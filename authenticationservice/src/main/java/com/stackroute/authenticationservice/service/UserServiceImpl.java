@@ -22,8 +22,9 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public User findByUsernameAndPassword(String userName, String password) throws UserNotFoundException {
-		User user = userRepository.findByUserNameAndPassword(userName, password);
+	public User findByUsernameAndPassword(String username, String password) throws UserNotFoundException {
+		System.out.println("username-->"+username+" password--->"+password);
+		User user = userRepository.findByUsernameAndPassword(username, password);
 		
 		if(user == null) {
 			throw new UserNotFoundException();

@@ -6,6 +6,6 @@ import com.stackroute.muzixservice.domain.User;
 
 public interface UserTrackRepository extends MongoRepository<User, String>{
 	
-	public User findByUserName(String userName);
+	public User findByUsername(String username);
 
 }

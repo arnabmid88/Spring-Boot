@@ -26,7 +26,7 @@ public class UserRepositoryTest {
 	public void setup() {
 		user = new User();
 		
-		user.setUserName("Arnab123");
+		user.setUsername("Arnab123");
 		user.setPassword("arnab123");
 	}
 	
@@ -39,15 +39,15 @@ public class UserRepositoryTest {
 	public void testSaveUserSuccess() {
 		userRepository.save(user);
 		User userobj = userRepository.findById(user.getUserId()).get();
-		Assert.assertEquals(user.getUserName(), userobj.getUserName());
+		Assert.assertEquals(user.getUsername(), userobj.getUsername());
 		userRepository.delete(user);
 	}
 	
 	@Test
 	public void testUserLoginSuccess() {
 		userRepository.save(user);
-		User userobj = userRepository.findByUserNameAndPassword(user.getUserName(), user.getPassword());
-		Assert.assertEquals(user.getUserName(), userobj.getUserName());
+		User userobj = userRepository.findByUsernameAndPassword(user.getUsername(), user.getPassword());
+		Assert.assertEquals(user.getUsername(), userobj.getUsername());
 		userRepository.delete(user);
 	}
 

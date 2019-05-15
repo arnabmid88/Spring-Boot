@@ -9,7 +9,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class User {
 	
 	@Id
-	private String userName;
+	private String username;
 	private String email;
 	private List<Track> trackList;
 	
@@ -21,23 +21,23 @@ public class User {
 
 
 
-	public User(String userName, String email, List<Track> trackList) {
+	public User(String username, String email, List<Track> trackList) {
 		super();
-		this.userName = userName;
+		this.username = username;
 		this.email = email;
 		this.trackList = trackList;
 	}
 
 
 
-	public String getUserName() {
-		return userName;
+	public String getUsername() {
+		return username;
 	}
 
 
 
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 
@@ -68,7 +68,7 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [userName=" + userName + ", email=" + email + ", trackList=" + trackList + "]";
+		return "User [userName=" + username + ", email=" + email + ", trackList=" + trackList + "]";
 	}
 	
 	

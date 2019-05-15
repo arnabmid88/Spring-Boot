@@ -74,47 +74,47 @@ public class UserTrackServiceTest {
 	@Test
 	public void testSaveUserTrackSuccess() throws TrackAlreadyExistsException{
 		user = new User("Arnab", "arnab@gmail.com", null);
-		when(userTrackRepository.findByUserName(user.getUserName())).thenReturn(user);
+		when(userTrackRepository.findByUsername(user.getUsername())).thenReturn(user);
 		
-		User fetchUser = userTrackServicesImpl.saveUserTrackToWishlist(track, user.getUserName());
+		User fetchUser = userTrackServicesImpl.saveUserTrackToWishlist(track, user.getUsername());
 		Assert.assertEquals(user, fetchUser);
 		
-		verify(userTrackRepository,times(1)).findByUserName(any());
+		verify(userTrackRepository,times(1)).findByUsername(any());
 		verify(userTrackRepository,times(1)).save(user);
 	}
 	
 	@Test
 	public void testUpdateCommentSuccess() throws TrackNotFoundException{
 		
-		when(userTrackRepository.findByUserName(user.getUserName())).thenReturn(user);
-		User fetchUser = userTrackServicesImpl.updateCommentForTrack("Comment Updated!", track.getTrackId(), user.getUserName());
+		when(userTrackRepository.findByUsername(user.getUsername())).thenReturn(user);
+		User fetchUser = userTrackServicesImpl.updateCommentForTrack("Comment Updated!", track.getTrackId(), user.getUsername());
 		
 		Assert.assertEquals(fetchUser.getTrackList().get(0).getComments(), "Comment Updated!");
 		
-		Mockito.verify(userTrackRepository,Mockito.times(1)).findByUserName(user.getUserName());
+		Mockito.verify(userTrackRepository,Mockito.times(1)).findByUsername(user.getUsername());
 		Mockito.verify(userTrackRepository,Mockito.times(1)).save(user);
 	}
 	
 	@Test
 	public void testDeleteUserTrack() throws TrackNotFoundException{
 		
-		when(userTrackRepository.findByUserName(user.getUserName())).thenReturn(user);
+		when(userTrackRepository.findByUsername(user.getUsername())).thenReturn(user);
 		
-		User fetchUser = userTrackServicesImpl.deleteUserTrackFromWishList(user.getUserName(), track.getTrackId());
+		User fetchUser = userTrackServicesImpl.deleteUserTrackFromWishList(user.getUsername(), track.getTrackId());
 		Assert.assertEquals(fetchUser, user);
 		
-		Mockito.verify(userTrackRepository,Mockito.times(1)).findByUserName(user.getUserName());
+		Mockito.verify(userTrackRepository,Mockito.times(1)).findByUsername(user.getUsername());
 		Mockito.verify(userTrackRepository,Mockito.times(1)).save(user);
 	}
 	
 	@Test
 	public void testGetAllUserTrack() throws Exception{
 		
-		when(userTrackRepository.findByUserName(user.getUserName())).thenReturn(user);
+		when(userTrackRepository.findByUsername(user.getUsername())).thenReturn(user);
 		
-		List<Track> fetchTrackList = userTrackServicesImpl.getAllUserTrackFromWishlist(user.getUserName());
+		List<Track> fetchTrackList = userTrackServicesImpl.getAllUserTrackFromWishlist(user.getUsername());
 		Assert.assertEquals(trackList, fetchTrackList);
 		
-		Mockito.verify(userTrackRepository,Mockito.times(1)).findByUserName(user.getUserName());
+		Mockito.verify(userTrackRepository,Mockito.times(1)).findByUsername(user.getUsername());
 	}
 }

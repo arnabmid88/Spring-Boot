@@ -101,55 +101,55 @@ public class UserTrackControllerTest  {
 	
 	@Test
 	public void testSaveTrackSuccess() throws Exception{
-		when(userTrackService.saveUserTrackToWishlist(any(), eq(user.getUserName()))).thenReturn(user);
+		when(userTrackService.saveUserTrackToWishlist(any(), eq(user.getUsername()))).thenReturn(user);
 		
-		mockMvc.perform(post("/api/v1/usertrackservice/user/{username}/track", user.getUserName()).contentType(MediaType.APPLICATION_JSON).content(jsonToString(track)))
+		mockMvc.perform(post("/api/v1/usertrackservice/user/{username}/track", user.getUsername()).contentType(MediaType.APPLICATION_JSON).content(jsonToString(track)))
 					.andExpect(status().isCreated()).andDo(print());
 					
-		verify(userTrackService,times(1)).saveUserTrackToWishlist(any(), eq(user.getUserName()));
+		verify(userTrackService,times(1)).saveUserTrackToWishlist(any(), eq(user.getUsername()));
 	}
 	
 	@Test
 	public void testSaveTrackFailure() throws Exception{
-		when(userTrackService.saveUserTrackToWishlist(any(), eq(user.getUserName()))).thenThrow(TrackAlreadyExistsException.class);
+		when(userTrackService.saveUserTrackToWishlist(any(), eq(user.getUsername()))).thenThrow(TrackAlreadyExistsException.class);
 		
-		mockMvc.perform(post("/api/v1/usertrackservice/user/{username}/track", user.getUserName()).contentType(MediaType.APPLICATION_JSON).content(jsonToString(track)))
+		mockMvc.perform(post("/api/v1/usertrackservice/user/{username}/track", user.getUsername()).contentType(MediaType.APPLICATION_JSON).content(jsonToString(track)))
 		.andExpect(status().isConflict()).andDo(print());
 					
-		verify(userTrackService,times(1)).saveUserTrackToWishlist(any(), eq(user.getUserName()));
+		verify(userTrackService,times(1)).saveUserTrackToWishlist(any(), eq(user.getUsername()));
 	}
 	
 	@Test
 	public void testUpdateCommentSuccess() throws Exception{
 		
-		when(userTrackService.updateCommentForTrack(track.getComments(), track.getTrackId(), user.getUserName())).thenReturn(user);
+		when(userTrackService.updateCommentForTrack(track.getComments(), track.getTrackId(), user.getUsername())).thenReturn(user);
 		
-		mockMvc.perform(patch("/api/v1/usertrackservice/user/{username}/track", user.getUserName()).contentType(MediaType.APPLICATION_JSON).content(jsonToString(track)))
+		mockMvc.perform(patch("/api/v1/usertrackservice/user/{username}/track", user.getUsername()).contentType(MediaType.APPLICATION_JSON).content(jsonToString(track)))
 					.andExpect(status().isOk()).andDo(print());
 					
-		verify(userTrackService,times(1)).updateCommentForTrack(track.getComments(), track.getTrackId(), user.getUserName());
+		verify(userTrackService,times(1)).updateCommentForTrack(track.getComments(), track.getTrackId(), user.getUsername());
 	}
 	
 	@Test
 	public void testDeleteTrack() throws Exception{
 		
-		when(userTrackService.deleteUserTrackFromWishList(user.getUserName(), track.getTrackId())).thenReturn(user);
+		when(userTrackService.deleteUserTrackFromWishList(user.getUsername(), track.getTrackId())).thenReturn(user);
 		
-		mockMvc.perform(delete("/api/v1/usertrackservice/user/{username}/track", user.getUserName()).contentType(MediaType.APPLICATION_JSON).content(jsonToString(track)))
+		mockMvc.perform(delete("/api/v1/usertrackservice/user/{username}/track", user.getUsername()).contentType(MediaType.APPLICATION_JSON).content(jsonToString(track)))
 					.andExpect(status().isOk()).andDo(print());
 					
-		verify(userTrackService,times(1)).deleteUserTrackFromWishList(user.getUserName(), track.getTrackId());
+		verify(userTrackService,times(1)).deleteUserTrackFromWishList(user.getUsername(), track.getTrackId());
 	}
 	
 	@Test
 	public void testGetAllTrack() throws Exception{
 		
-		when(userTrackService.getAllUserTrackFromWishlist(user.getUserName())).thenReturn(trackList);
+		when(userTrackService.getAllUserTrackFromWishlist(user.getUsername())).thenReturn(trackList);
 		
-		mockMvc.perform(get("/api/v1/usertrackservice/user/{username}/tracks", user.getUserName()).contentType(MediaType.APPLICATION_JSON).content(jsonToString(track)))
+		mockMvc.perform(get("/api/v1/usertrackservice/user/{username}/tracks", user.getUsername()).contentType(MediaType.APPLICATION_JSON).content(jsonToString(track)))
 					.andExpect(status().isOk()).andDo(print());
 					
-		verify(userTrackService,times(1)).getAllUserTrackFromWishlist(user.getUserName());
+		verify(userTrackService,times(1)).getAllUserTrackFromWishlist(user.getUsername());
 	}
 
 }

@@ -44,9 +44,9 @@ public class UserController {
 		
 		Map<String, String> map = null;
 		try {
-			User userObj = userService.findByUsernameAndPassword(user.getUserName(), user.getPassword());
+			User userObj = userService.findByUsernameAndPassword(user.getUsername(), user.getPassword());
 			
-			if(userObj.getUserName().equals(user.getUserName())) {
+			if(userObj.getUsername().equals(user.getUsername())) {
 				map = tokeGenerator.generateToken(user);
 			}
 			

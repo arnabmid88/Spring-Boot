@@ -63,7 +63,7 @@ public class UserControllerTest {
 		
 		user = new User();
 		
-		user.setUserName("Arnab123");
+		user.setUsername("Arnab123");
 		user.setPassword("arnab123");	
 	}
 	
@@ -84,7 +84,7 @@ public class UserControllerTest {
 	@Test
 	public void testSaveUser() throws Exception {
 		when(userService.saveUser(any())).thenReturn(user);
-		when(userService.findByUsernameAndPassword(user.getUserName(), user.getPassword())).thenReturn(user);
+		when(userService.findByUsernameAndPassword(user.getUsername(), user.getPassword())).thenReturn(user);
 		
 		mockMvc.perform(post("/api/v1/userservice/save").contentType(MediaType.APPLICATION_JSON).content(jsonToString(user))).
 			andExpect(status().isCreated()).andDo(print());
@@ -94,12 +94,12 @@ public class UserControllerTest {
 	@Test
 	public void testLoginSuccess() throws Exception {
 		when(userService.saveUser(user)).thenReturn(user);
-		when(userService.findByUsernameAndPassword(user.getUserName(), user.getPassword())).thenReturn(user);
+		when(userService.findByUsernameAndPassword(user.getUsername(), user.getPassword())).thenReturn(user);
 		
 		mockMvc.perform(post("/api/v1/userservice/login").contentType(MediaType.APPLICATION_JSON).content(jsonToString(user))).
 			andExpect(status().isOk()).andDo(print());
 		
-		verify(userService,times(1)).findByUsernameAndPassword(user.getUserName(), user.getPassword());
+		verify(userService,times(1)).findByUsernameAndPassword(user.getUsername(), user.getPassword());
 	}
 
 }

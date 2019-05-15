@@ -26,7 +26,7 @@ public class UserTrackServiceImpl implements UserTrackService{
 
 	@Override
 	public User saveUserTrackToWishlist(Track track, String username) throws TrackAlreadyExistsException {
-		User fetchUser = userTrackRepository.findByUserName(username);
+		User fetchUser = userTrackRepository.findByUsername(username);
 		List<Track> trackList = fetchUser.getTrackList();
 		if(trackList != null) {
 			
@@ -48,7 +48,7 @@ public class UserTrackServiceImpl implements UserTrackService{
 
 	@Override
 	public User deleteUserTrackFromWishList(String username, String trackId) throws TrackNotFoundException {
-		User fetchUser = userTrackRepository.findByUserName(username);
+		User fetchUser = userTrackRepository.findByUsername(username);
 		List<Track> fetchTracks = fetchUser.getTrackList();
 		
 		if(fetchTracks.size()>0) {
@@ -69,7 +69,7 @@ public class UserTrackServiceImpl implements UserTrackService{
 
 	@Override
 	public User updateCommentForTrack(String comment, String trackId, String username) throws TrackNotFoundException {
-		User fetchUser = userTrackRepository.findByUserName(username);
+		User fetchUser = userTrackRepository.findByUsername(username);
 		List<Track> fetchTracks = fetchUser.getTrackList();
 		
 		if(fetchTracks.size()>0) {
@@ -90,14 +90,14 @@ public class UserTrackServiceImpl implements UserTrackService{
 
 	@Override
 	public List<Track> getAllUserTrackFromWishlist(String username) throws Exception {
-		User fetchUser = userTrackRepository.findByUserName(username);
+		User fetchUser = userTrackRepository.findByUsername(username);
 		
 		return fetchUser.getTrackList();
 	}
 
 	@Override
 	public User registerUser(User user) throws UserAlreadyExistsException {
-		User fetchUser = userTrackRepository.findByUserName(user.getUserName());
+		User fetchUser = userTrackRepository.findByUsername(user.getUsername());
 		
 		if(fetchUser != null) {
 			throw new UserAlreadyExistsException();

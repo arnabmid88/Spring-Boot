@@ -63,6 +63,7 @@ public class UserTrackController {
 		return responseEntity;
 	}
 	
+	@CrossOrigin
 	@DeleteMapping("user/{username}/track")
 	public ResponseEntity<?> deleteTrackFromWishlist(@PathVariable("username") String username, @RequestBody Track track) throws TrackNotFoundException {
 		

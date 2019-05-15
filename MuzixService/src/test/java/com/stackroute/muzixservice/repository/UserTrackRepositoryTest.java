@@ -48,7 +48,7 @@ public class UserTrackRepositoryTest {
 	@Test
 	public void testSaveUser() {
 		userTrackRepository.save(user);
-		User fetchUser = userTrackRepository.findByUserName(user.getUserName());
+		User fetchUser = userTrackRepository.findByUsername(user.getUsername());
 		Assert.assertEquals(fetchUser.getTrackList().get(0).getTrackId(),user.getTrackList().get(0).getTrackId());
 	}
 	
