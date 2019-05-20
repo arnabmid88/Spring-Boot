@@ -63,12 +63,11 @@ public class UserTrackController {
 		return responseEntity;
 	}
 	
-	@CrossOrigin
-	@DeleteMapping("user/{username}/track")
-	public ResponseEntity<?> deleteTrackFromWishlist(@PathVariable("username") String username, @RequestBody Track track) throws TrackNotFoundException {
+	@DeleteMapping("user/{username}/{trackId}")
+	public ResponseEntity<?> deleteTrackFromWishlist(@PathVariable("username") String username, @PathVariable("trackId") String trackId) throws TrackNotFoundException {
 		
 		try {
-			User user = userTrackService.deleteUserTrackFromWishList(username, track.getTrackId());
+			User user = userTrackService.deleteUserTrackFromWishList(username, trackId);
 			responseEntity = new ResponseEntity(user, HttpStatus.OK);
 		}catch(TrackNotFoundException tnfe) {
 			throw new TrackNotFoundException();

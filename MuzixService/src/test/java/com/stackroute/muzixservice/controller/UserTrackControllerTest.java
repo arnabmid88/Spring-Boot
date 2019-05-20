@@ -135,7 +135,7 @@ public class UserTrackControllerTest  {
 		
 		when(userTrackService.deleteUserTrackFromWishList(user.getUsername(), track.getTrackId())).thenReturn(user);
 		
-		mockMvc.perform(delete("/api/v1/usertrackservice/user/{username}/track", user.getUsername()).contentType(MediaType.APPLICATION_JSON).content(jsonToString(track)))
+		mockMvc.perform(delete("/api/v1/usertrackservice/user/{username}/{trackId}", user.getUsername(),track.getTrackId()).contentType(MediaType.APPLICATION_JSON).content(jsonToString(track)))
 					.andExpect(status().isOk()).andDo(print());
 					
 		verify(userTrackService,times(1)).deleteUserTrackFromWishList(user.getUsername(), track.getTrackId());

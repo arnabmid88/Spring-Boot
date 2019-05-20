@@ -1,22 +1,67 @@
 version: "2.0"
 services:
- Spring:
-  image: arnab123/muzixservicebackend:v1
+ authService:
+  image: arnab123/authservice:v1
   restart: always
   network_mode: host
-  container_name: spring-image
+  depends_on:
+   - mysql
+   - eurekaServer
+  ports: 
+   - 8084:8084
+
+ muzixService:
+  image: arnab123/muzixservicev2:v1
+  restart: always
+  network_mode: host
   depends_on:
    - mongo
+   - eurekaServer
   ports:
-   - 8083:8083
+   - 8085:8085
+ 
+ eurekaServer:
+  image: arnab123/eurekaservice:v1
+  restart: always
+  network_mode: host
+  ports:
+   - 9003:9003
+ 
+ zuulService:
+  image: arnab123/zuulservice:v1
+  restart: always
+  network_mode: host
+  ports:
+   - 8086:8086
+ 
+ orchestrationService:
+  image: arnab123/orchestrationservice:v1
+  restart: always
+  network_mode: host
+  depends_on:
+   - eurekaServer
+  ports:
+   - 8888:8888
  
  angular:
-  image: arnab123/muzixservicefrontend:v1
+  image: arnab123/angularfrontend:v1
   network_mode: host
   container_name: angular-docker
   ports:
    - 8080:8080
  
+ mysql: 
+  image: mysql:5.5
+  ports: 
+    - 3306:3306 
+  container_name: mysql_container
+  network_mode: host
+  environment: 
+    MYSQL_ROOT_PASSWORD: root123
+    MYSQL_PASSWORD: root123
+    MYSQL_USER: approot
+    MYSQL_DATABASE: userdb  
+
  mongo:
   image: mongo:3.2-jessie
   ports:
