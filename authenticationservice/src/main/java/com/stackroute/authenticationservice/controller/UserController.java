@@ -33,12 +33,12 @@ public class UserController {
 		this.tokeGenerator = tokeGenerator;
 	}
 	
-	@PostMapping("/save")
-	public ResponseEntity saveUser(@RequestBody User user) {
-		userService.saveUser(user);
-		
-		return responseEntity = new ResponseEntity(user, HttpStatus.CREATED);
-	}
+//	@PostMapping("/save")
+//	public ResponseEntity saveUser(@RequestBody User user) {
+//		userService.saveUser(user);
+//		
+//		return responseEntity = new ResponseEntity(user, HttpStatus.CREATED);
+//	}
 	@PostMapping("/login")
 	public ResponseEntity loginUser(@RequestBody User user) throws UserNotFoundException {
 		

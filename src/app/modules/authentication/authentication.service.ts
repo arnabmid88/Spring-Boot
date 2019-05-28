@@ -12,7 +12,8 @@ export class AuthenticationService {
   private SpringSaveEndpoint :String;
 
   constructor(private httpClient :HttpClient) {
-    this.SpringRegisterEndpoint = "http://localhost:8085/api/v1/usertrackservice/";
+    // this.SpringRegisterEndpoint = "http://localhost:8085/api/v1/usertrackservice/";
+    this.SpringRegisterEndpoint = "http://localhost:8086/muzixservice/api/v1/usertrackservice/register";
     this.SpringSaveEndpoint = "http://localhost:8084/api/v1/userservice/";
    }
 

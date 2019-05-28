@@ -6,22 +6,26 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.stackroute.muzixservice.config.Producer;
 import com.stackroute.muzixservice.domain.Track;
 import com.stackroute.muzixservice.domain.User;
 import com.stackroute.muzixservice.exception.TrackAlreadyExistsException;
 import com.stackroute.muzixservice.exception.TrackNotFoundException;
 import com.stackroute.muzixservice.exception.UserAlreadyExistsException;
 import com.stackroute.muzixservice.repository.UserTrackRepository;
+import com.stackroute.rabbitmq.domain.UserDTO;
 
 @Service
 public class UserTrackServiceImpl implements UserTrackService{
 	
 	private UserTrackRepository userTrackRepository;
+	private Producer producer;
 
 	@Autowired	
-	public UserTrackServiceImpl(UserTrackRepository userTrackRepository) {
+	public UserTrackServiceImpl(UserTrackRepository userTrackRepository, Producer producer) {
 		super();
 		this.userTrackRepository = userTrackRepository;
+		this.producer = producer;
 	}
 
 	@Override
@@ -37,12 +41,31 @@ public class UserTrackServiceImpl implements UserTrackService{
 			}
 			trackList.add(track);
 			fetchUser.setTrackList(trackList);
+			
+			UserDTO userDto = new UserDTO();
+			userDto.setUsername(username);
+			userDto.setEmail(fetchUser.getEmail());
+			List list = new ArrayList();
+			list.add(trackList);
+			userDto.setTrackList(list);
+			userTrackRepository.save(fetchUser);
+			producer.sendTrackToRabbitMQ(userDto);
+			
 		}else {
 			trackList = new ArrayList<Track>();
 			trackList.add(track);
 			fetchUser.setTrackList(trackList);
+			
+			UserDTO userDto = new UserDTO();
+			userDto.setUsername(username);
+			userDto.setEmail(fetchUser.getEmail());
+			List list = new ArrayList();
+			list.add(trackList);
+			userDto.setTrackList(list);
+			userTrackRepository.save(fetchUser);
+			producer.sendTrackToRabbitMQ(userDto);
 		}
-		userTrackRepository.save(fetchUser);
+//		userTrackRepository.save(fetchUser);
 		return fetchUser;
 	}
 
@@ -97,12 +120,17 @@ public class UserTrackServiceImpl implements UserTrackService{
 
 	@Override
 	public User registerUser(User user) throws UserAlreadyExistsException {
+		UserDTO userDto = new UserDTO();
+		userDto.setUsername(user.getUsername());
+		userDto.setEmail(user.getEmail());
+		userDto.setPassword(user.getPassword());
 		User fetchUser = userTrackRepository.findByUsername(user.getUsername());
 		
 		if(fetchUser != null) {
 			throw new UserAlreadyExistsException();
 		}else {
 			userTrackRepository.save(user);
+			producer.sendMessageToRabbitMQ(userDto);
 			return user;
 		}
 	}

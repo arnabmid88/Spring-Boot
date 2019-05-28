@@ -1,2 +1,45 @@
 /* You can add global styles to this file, and also import other style files */
-@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+html, body {height: 100%; width: 100%; overflow-x: hidden;}
+
+body {margin: 0;font-family: Roboto, "Helvetica Neue", "sans-sarif";}
+
+.mat-form-field-appearance-outline .mat-form-field-outline-thick{
+    color: #9c1148;
+}
+
+@media(max-width:575px){
+    .mat-button{
+        font-size: 0.9em !important;
+    }
+
+    .example-card{
+        width: 62vw !important;
+    }
+
+    .image{
+        width: 44vw !important;
+    }
+
+    .mat-card{
+        height: 43vh !important;
+        width: 52vw !important;
+        margin-bottom: 10vh !important;
+    }
+
+    .my-form{
+        width: 41vw !important;
+    }
+
+    .mat-menu-item{
+        font-size: 0.9em !important;
+    }
+
+    .mat-form-field.field{
+        padding-left: 12vh !important;
+    }
+
+    .mat-card-actions .mat-button .mat-card-actions .mat-raised-button{
+        margin: 4px 8px !important;
+    }
+}

@@ -19,6 +19,7 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import com.stackroute.muzixservice.config.Producer;
 import com.stackroute.muzixservice.domain.Artist;
 import com.stackroute.muzixservice.domain.Image;
 import com.stackroute.muzixservice.domain.Track;
@@ -37,6 +38,8 @@ public class UserTrackServiceTest {
 	@Mock
 	private UserTrackRepository userTrackRepository;
 	
+	@Mock
+	private Producer producer;
 	private Track track;
 	private Artist artist;
 	private Image image;
